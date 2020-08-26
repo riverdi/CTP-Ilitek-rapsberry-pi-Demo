@@ -1,0 +1,40 @@
+#include <stdio.h>
+
+#include "ilitek_common.h"
+#include "ilitek_protocol.h"
+
+// ----------------------------------------- PROGRAM
+
+int
+main( int argc, char ** argv )
+{
+    ilitek_interface_init( );
+    ilitek_reset( 1000 );
+
+    api_protocol_init_func( );
+
+    for ( ; ; )
+    {
+        ilitek_read_data_and_report_3XX( );
+
+#if 0
+        int i;
+        int x_coord;
+        int y_coord;
+
+        for (i = 0; i < ILITEK_SUPPORT_MAX_POINT; ++i)
+        {
+            if (ilitek_data->touch_flag[i] == 1)
+            {
+                x_coord = ilitek_data->tp[i].x;
+                y_coord = ilitek_data->tp[i].y;
+
+                printf( "\r\nPoint (%d)", i);
+                printf( " X: %d", x_coord );
+                printf( " y: %d", y_coord );
+            }
+        }
+#endif
+
+    }
+}
